@@ -1,6 +1,25 @@
-const problemElem = document.querySelector("#problem");
-const answerPromptElem = document.querySelector(".answer-prompt");
-const answerElem = document.querySelector(".answer");
+const config = {
+    problemElem: document.querySelector("#problem"),
+    answerPromptElem: document.querySelector(".answer-prompt"),
+    answerElem: document.querySelector(".answer"),
+    dropDownElem: document.querySelector("#mode-select"),
+
+    problemOptions: {
+        "Two-digit addition": twoDigitAddition,
+        "Three-digit addition": twoDigitAddition
+    }
+}
+
+initDropDown()
+
+function initDropDown() {
+    for (let [optionName, optionHandler] of Object.entries(config.problemOptions))
+        config.dropDownElem.add(new Option(optionName, optionHandler.toString()));
+}
+
+// define dropbox handler
+// define all the problems according to dropbox
+
 let problems = defineProblems();
 let currentProblemIdx = -1;
 
@@ -14,16 +33,16 @@ function defineProblems() {
 
 
 function updateProblem() {
-    answerPromptElem.value = "";
+    config.answerPromptElem.value = "";
     let currProblem = problems[++currentProblemIdx];
-    problemElem.textContent = currProblem.problem + " =";
-    answerElem.textContent = currProblem.solution
+    config.problemElem.textContent = currProblem.problem + " =";
+    config.answerElem.textContent = currProblem.solution
 }
 
 function enableInputValidation() {
-    answerPromptElem.addEventListener("input", d => {
-        if (answerPromptElem.value == problems[currentProblemIdx].solution) {
-            answerPromptElem.value = "";
+    config.answerPromptElem.addEventListener("input", d => {
+        if (config.answerPromptElem.value == problems[currentProblemIdx].solution) {
+            config.answerPromptElem.value = "";
             updateProblem()
         }
     })

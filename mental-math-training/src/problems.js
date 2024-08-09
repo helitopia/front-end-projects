@@ -61,6 +61,10 @@ function twoDigitAddition() {
     return addition([0, 100]);
 }
 
+function threeDigitAddition() {
+    return addition([0, 1000]);
+}
+
 function addition(operandOneRange, operandTwoRange, operandOneFilter, operandTwoFilter) {
     operandTwoRange ||= [...operandOneRange];
     operandOneFilter ||= x => x;
